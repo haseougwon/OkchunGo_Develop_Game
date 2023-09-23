@@ -13,15 +13,15 @@ public class player_move : MonoBehaviour
 
     void FixedUpdate()
     {
-        //Ä³¸¯ÅÍ ¿òÁ÷ÀÓ
+        //Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         float h = Input.GetAxisRaw("Horizontal");
         rigid.AddForce(Vector2.right * h, ForceMode2D.Impulse);
 
-        if(rigid.velocity.x > maxSpeed)  //¿À¸¥ÂÊ ÃÖ´ë¼Óµµ
+        if(rigid.velocity.x > maxSpeed)  //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½Óµï¿½
         {
             rigid.velocity = new Vector2(maxSpeed, rigid.velocity.y);
         }
-        else if (rigid.velocity.x < maxSpeed * (-1)) //¿ÞÂÊ ÃÖ´ë¼Óµµ
+        else if (rigid.velocity.x < maxSpeed * (-1)) //ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½Óµï¿½
         {
             rigid.velocity = new Vector2(maxSpeed * (-1), rigid.velocity.y);
         }
