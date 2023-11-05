@@ -7,7 +7,7 @@ public class camera_controller : MonoBehaviour
     GameObject player;
     void Awake()
     {
-        this.player = GameObject.Find("player");
+        this.player = GameObject.Find("Player");
     }
 
     void LateUpdate()

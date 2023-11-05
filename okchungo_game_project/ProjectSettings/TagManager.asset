@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Platform
   - portal
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -13,12 +14,12 @@ TagManager:
   - Platform
   - Water
   - UI
+  - Enemy
   - 
   - 
   - 
-  - 
-  - 
-  - 
+  - Player
+  - PlayerDamaged
   - 
   - 
   - 

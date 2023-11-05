@@ -3,13 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class monster_move : MonoBehaviour
+public class Enemy_move : MonoBehaviour
 {
     Rigidbody2D rigid;
+    SpriteRenderer spriteRenderer;
+    BoxCollider2D collider1;
+
     public int nextMove;
     void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
+        collider1 = GetComponent<BoxCollider2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         Think();
     }
 
@@ -52,5 +57,23 @@ public class monster_move : MonoBehaviour
         }
         
         Invoke("Think", nextThink);
+    }
+
+    public void OnDamaged()
+    {
+        CancelInvoke();
+
+        spriteRenderer.color = new Color(1,1,1,0.4f);
+
+        collider1.enabled = false;
+
+        rigid.AddForce(Vector2.up * 5, ForceMode2D.Impulse);
+
+        Invoke("DeActive", 5);
+    }
+
+    void DeActive()
+    {
+        gameObject.SetActive(false);
     }
 }
