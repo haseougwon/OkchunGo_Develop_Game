@@ -314,7 +314,7 @@ Rigidbody2D:
   m_Constraints: 4
 --- !u!212 &1021710947
 SpriteRenderer:
-  m_ObjectHideFlags: 0z
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -529,7 +529,7 @@ MonoBehaviour:
   jumpPower: 10
   jumpCount: 1
   cheakRadius: 0.35
-  "\uBB34\uC801\uC2DC\uAC04": 1
+  absoluteTime: 2
   mask:
     serializedVersion: 2
     m_Bits: 8
@@ -1022,3 +1022,4 @@ SceneRoots:
   - {fileID: 1290076508}
   - {fileID: 852262932}
   - {fileID: 1021710948}
+  - {fileID: 1348911783}

@@ -71,7 +71,6 @@ public class PlayerMove : MonoBehaviour
             {
                 anim.SetBool("isRun", false);
                 anim.SetBool("isJump", true);
-                rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
             }
             else
             {
@@ -89,10 +88,9 @@ public class PlayerMove : MonoBehaviour
     
     void FixedUpdate()
     {
-        if (rigid.velocity.x > maxSpeed)
-        {
             float h = Input.GetAxisRaw("Horizontal");
             rigid.AddForce(Vector2.right * h, ForceMode2D.Impulse);
+
             if (rigid.velocity.x > maxSpeed)
             {
                 rigid.velocity = new Vector2(maxSpeed, rigid.velocity.y);
@@ -100,9 +98,7 @@ public class PlayerMove : MonoBehaviour
             else if (rigid.velocity.x < maxSpeed * (-1))
             {
                 rigid.velocity = new Vector2(maxSpeed * (-1), rigid.velocity.y);
-            }
-        }
-   
+            }   
     }
 
     void OnCollisionEnter2D(Collision2D collision)

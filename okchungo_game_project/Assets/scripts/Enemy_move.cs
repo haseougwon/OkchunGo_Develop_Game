@@ -69,11 +69,6 @@ public class Enemy_move : MonoBehaviour
 
         rigid.AddForce(Vector2.up * 5, ForceMode2D.Impulse);
 
-        Invoke("DeActive", 5);
-    }
-
-    void DeActive()
-    {
-        gameObject.SetActive(false);
+        Destroy(gameObject, 5);
     }
 }
