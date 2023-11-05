@@ -10,7 +10,7 @@ public class PlayerMove : MonoBehaviour
     public int jumpCount;
     int jumpCut;
     [SerializeField] float cheakRadius;
-    public int �����ð�;
+    public int absoluteTime;
 
     bool isPlatform;
 
@@ -89,8 +89,6 @@ public class PlayerMove : MonoBehaviour
     
     void FixedUpdate()
     {
-        float h = Input.GetAxisRaw("Horizontal");
-        rigid.AddForce(Vector2.right * h, ForceMode2D.Impulse);
         if (rigid.velocity.x > maxSpeed)
         {
             float h = Input.GetAxisRaw("Horizontal");
@@ -139,7 +137,7 @@ public class PlayerMove : MonoBehaviour
         int dirc = transform.position.x - targetPos.x > 0 ? 1 : -1;
         rigid.AddForce(new Vector2(dirc, 1)* 10, ForceMode2D.Impulse);
 
-        Invoke("OffDamaged", �����ð�);
+        Invoke("OffDamaged", absoluteTime);
     }
     void OffDamaged()
     {
