@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 89363477}
   - component: {fileID: 89363476}
   m_Layer: 5
-  m_Name: Text
+  m_Name: slot (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -802,7 +802,7 @@ GameObject:
   - component: {fileID: 960834712}
   - component: {fileID: 960834711}
   m_Layer: 5
-  m_Name: Text
+  m_Name: slot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1048,7 +1048,7 @@ GameObject:
   - component: {fileID: 1372867587}
   - component: {fileID: 1372867586}
   m_Layer: 5
-  m_Name: Text
+  m_Name: slot (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
