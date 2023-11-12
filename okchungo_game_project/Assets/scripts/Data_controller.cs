@@ -2,79 +2,55 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
-using System;
+
+public class PlayerData
+{
+    public string name;
+    public int level = 1;
+    public int coin = 0;
+    public int item = -1;
+}
 
 public class Data_controller : MonoBehaviour
 {
-    static GameObject _container;
-    static GameObject Container
+    public static Data_controller instance; 
+
+    public PlayerData nowPlayer = new PlayerData(); 
+
+    public string path; 
+    public int nowSlot; 
+
+    private void Awake()
     {
-        get
+        if (instance == null)
         {
-            return _container;
+            instance = this;
         }
+        else if (instance != this)
+        {
+            Destroy(instance.gameObject);
+        }
+        DontDestroyOnLoad(this.gameObject);
+
+        path = Application.persistentDataPath + "/save";	
+        print(path);
     }
 
-    static Data_controller _instance;
-    public static Data_controller Instance
+    public void SaveData()
     {
-        get
-        {
-            if (!_instance)
-            {
-                _container = new GameObject();
-                _container.name = "Data_controller";
-                _instance = _container.AddComponent(typeof(Data_controller)) as Data_controller;
-                DontDestroyOnLoad( _container );
-            }
-            return _instance;
-        }
+        string data = JsonUtility.ToJson(nowPlayer);
+        File.WriteAllText(path + nowSlot.ToString(), data);
     }
 
-    public string GameDataFileName = "okchungogame.Json";
-
-    public GameData _gameData;
-    public GameData gameData
+    public void LoadData()
     {
-        get
-        {
-            if (_gameData == null)
-            {
-                LoadGameData();
-                SaveGameData();
-            }
-            return _gameData;
-        }
+        string data = File.ReadAllText(path + nowSlot.ToString());
+        nowPlayer = JsonUtility.FromJson<PlayerData>(data);
     }
 
-    public void LoadGameData()
+    public void DataClear()
     {
-        string filePath = Application.persistentDataPath + GameDataFileName;
-
-        if (File.Exists(filePath))
-        {
-            Debug.Log("불러오기 성공");
-            string FromJsonData = File.ReadAllText(filePath);
-            _gameData = JsonUtility.FromJson<GameData>(FromJsonData);
-        }
-        else
-        {
-            Debug.Log("새로운 파일 생성");
-
-            _gameData = new GameData();
-        }
-    }
-
-    public void SaveGameData()
-    {
-        string ToJsonData = JsonUtility.ToJson(gameData);
-        string filePath = Application.persistentDataPath + GameDataFileName;
-        File.WriteAllText(filePath, ToJsonData);
-        Debug.Log("저장 완료");
-    }
-
-    private void OnApplicationQuit()
-    {
-        SaveGameData();
+        nowSlot = -1;
+        nowPlayer = new PlayerData();
     }
 }
