@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,7 @@ public class PlayerMove : MonoBehaviour
     int jumpCut;
     [SerializeField] float cheakRadius;
     public int absoluteTime;
+    public bool isAbsoluteTime = false;
 
     bool isPlatform;
 
@@ -67,25 +69,22 @@ public class PlayerMove : MonoBehaviour
 
         if (Input.GetAxisRaw("Horizontal") == 0)
         {
-            if (Input.GetButtonDown("Jump"))
-            {
-                anim.SetBool("isRun", false);
-                anim.SetBool("isJump", true);
-            }
-            else
-            {
-                anim.SetBool("isRun", false);
-                anim.SetBool("isJump", false);
-            }
-        }
-        else
-        {
-
             anim.SetBool("isRun", false);
+        }
+        else if (Input.GetAxisRaw("Horizontal") < 0)
+        {
             anim.SetBool("isRun", true);
         }
+        else if (Input.GetAxisRaw("Horizontal") > 0)
+        {
+            anim.SetBool("isRun", true);
+        }
+
+        if (Input.GetButtonDown("Jump")) {
+            anim.SetTrigger("doJump");
+        }
     }
-    
+
     void FixedUpdate()
     {
             float h = Input.GetAxisRaw("Horizontal");
@@ -118,12 +117,13 @@ public class PlayerMove : MonoBehaviour
 
     void OnAttack(Transform enemy)
     {
+
         rigid.AddForce(Vector2.up * 10, ForceMode2D.Impulse);
 
         Enemy_move enemyMove = enemy.GetComponent<Enemy_move>();
         enemyMove.OnDamaged();
+
     }
-    
     void OnDamaged(Vector2 targetPos)
     {
         gameObject.layer = 11;
@@ -132,13 +132,14 @@ public class PlayerMove : MonoBehaviour
 
         int dirc = transform.position.x - targetPos.x > 0 ? 1 : -1;
         rigid.AddForce(new Vector2(dirc, 1)* 10, ForceMode2D.Impulse);
-
         Invoke("OffDamaged", absoluteTime);
+        
     }
     void OffDamaged()
     {
         gameObject.layer = 10;
 
         spriteRenderer.color = new Color(1, 1, 1, 1);
+        isAbsoluteTime = false;
     }
 }
