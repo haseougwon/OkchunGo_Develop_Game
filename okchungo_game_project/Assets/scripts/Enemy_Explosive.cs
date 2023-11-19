@@ -52,7 +52,7 @@ public class Enemy_Explosive : MonoBehaviour
     public void stop()
     {
         player = false;
-        //Destroy(gameObject, 1);
+        Destroy(gameObject, 1);
     }
 
     public void boom()

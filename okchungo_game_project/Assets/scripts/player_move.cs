@@ -145,6 +145,16 @@ public class player_move : MonoBehaviour
 
                 Destroy(collision.gameObject);
         }
+
+        if (collision.gameObject.tag == "coin")
+        {
+            //���� ����
+            Object.GetComponent<Game_Manager>().CoinUp();
+
+            //���� ���� ���
+            Coin coin2 = collision.gameObject.GetComponent<Coin>();
+            coin2.Coin1();
+        }
     }
 
     void SpeedUpStop()
@@ -184,23 +194,5 @@ public class player_move : MonoBehaviour
 
         spriteRenderer.color = new Color(1, 1, 1, 1);
         isAbsoluteTime = false;
-    }
-
-    //���� �浹 Ȯ��
-    void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "coin")
-        {
-            //���� ����
-            Object.GetComponent<Game_Manager>().CoinUp();
-
-            //���� ���� ���
-            Coin coin2 = collision.gameObject.GetComponent<Coin>();
-            coin2.Coin1();
-        }
-
-        
-    }
-
-   
+    } 
 }

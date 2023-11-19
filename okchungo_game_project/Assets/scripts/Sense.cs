@@ -29,9 +29,6 @@ public class Sense : MonoBehaviour
     {
         this.gameObject.tag = "boom";
 
-        col.enabled = false;
-        col.enabled = true;
-
         spriteRenderer.color = new Color(1, 1, 1, 1);
         Object.GetComponent<Enemy_Explosive>().stop();
 
