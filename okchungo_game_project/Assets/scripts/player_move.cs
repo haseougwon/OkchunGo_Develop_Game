@@ -13,7 +13,6 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] float cheakRadius;
     public int absoluteTime;
     public bool isAbsoluteTime = false;
-
     bool isPlatform;
 
     [SerializeField] LayerMask mask; 
@@ -21,7 +20,16 @@ public class PlayerMove : MonoBehaviour
     Rigidbody2D rigid;
     SpriteRenderer spriteRenderer;
     Animator anim;
-    
+    private AudioSource audioSource;
+    public AudioClip JumpSound;
+    public AudioClip AttackSound;
+    public AudioClip DamagedSound;
+
+
+    void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
     void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
@@ -30,10 +38,9 @@ public class PlayerMove : MonoBehaviour
         anim = GetComponent<Animator>();
         jumpCut = jumpCount;
     }
-
-
-    private void Update()
+    void Update()
     {
+        
         Vector2 frontVec = new Vector2(rigid.position.x, rigid.position.y);
         Debug.DrawRay(frontVec, Vector3.down * 0.55f, new Color(0, 1, 0));
         RaycastHit2D isPlatform = Physics2D.Raycast(frontVec, Vector3.down, 0.55f, LayerMask.GetMask("Platform"));
@@ -41,6 +48,9 @@ public class PlayerMove : MonoBehaviour
         if (isPlatform == true && Input.GetButtonUp("Jump") && jumpCut > 0)
         {
             rigid.velocity = Vector2.up * jumpPower;
+            audioSource.clip = JumpSound;
+            audioSource.Play();
+
         }
         if (Input.GetButtonUp("Jump"))
         {
@@ -117,7 +127,8 @@ public class PlayerMove : MonoBehaviour
 
     void OnAttack(Transform enemy)
     {
-
+        audioSource.clip = AttackSound;
+        audioSource.Play();
         rigid.AddForce(Vector2.up * 10, ForceMode2D.Impulse);
 
         Enemy_move enemyMove = enemy.GetComponent<Enemy_move>();
@@ -127,7 +138,8 @@ public class PlayerMove : MonoBehaviour
     void OnDamaged(Vector2 targetPos)
     {
         gameObject.layer = 11;
-
+        audioSource.clip = DamagedSound;
+        audioSource.Play();
         spriteRenderer.color = new Color(1,1,1,0.4f);
 
         int dirc = transform.position.x - targetPos.x > 0 ? 1 : -1;
