@@ -4,15 +4,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class PlayerMove : MonoBehaviour
+public class player_move : MonoBehaviour
 {
     public float maxSpeed;
     public float jumpPower;
     public int jumpCount;
     int jumpCut;
-    [SerializeField] float cheakRadius;
+    [SerializeField] 
+    float cheakRadius;
     public int absoluteTime;
     public bool isAbsoluteTime = false;
+    public GameObject Object;
 
     bool isPlatform;
 
@@ -113,7 +115,14 @@ public class PlayerMove : MonoBehaviour
                 OnDamaged(collision.transform.position);
             }
         }
+
+        //폭발 범위 확인
+        if (collision.gameObject.tag == "boom")
+        {
+            OnDamaged(collision.transform.position);
+        }
     }
+
 
     void OnAttack(Transform enemy)
     {
@@ -124,7 +133,8 @@ public class PlayerMove : MonoBehaviour
         enemyMove.OnDamaged();
 
     }
-    void OnDamaged(Vector2 targetPos)
+
+    public void OnDamaged(Vector2 targetPos)
     {
         gameObject.layer = 11;
 
@@ -142,4 +152,22 @@ public class PlayerMove : MonoBehaviour
         spriteRenderer.color = new Color(1, 1, 1, 1);
         isAbsoluteTime = false;
     }
+
+    //코인 충돌 확인
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "coin")
+        {
+            //점수 증가
+            Object.GetComponent<Game_Manager>().CoinUp();
+
+            //코인 삭제 모션
+            Coin coin2 = collision.gameObject.GetComponent<Coin>();
+            coin2.Coin1();
+        }
+
+        
+    }
+
+   
 }

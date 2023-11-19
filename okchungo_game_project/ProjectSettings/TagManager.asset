@@ -7,6 +7,9 @@ TagManager:
   - Platform
   - portal
   - Enemy
+  - coin
+  - Enemy(E)
+  - boom
   layers:
   - Default
   - TransparentFX
