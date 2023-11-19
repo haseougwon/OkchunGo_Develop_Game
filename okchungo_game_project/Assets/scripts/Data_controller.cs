@@ -6,9 +6,9 @@ using System.IO;
 public class PlayerData
 {
     public string name;
-    public int level = 1;
+    public int stage = 1;
     public int coin = 0;
-    public int item = -1;
+    public float time = 0;
 }
 
 public class Data_controller : MonoBehaviour
