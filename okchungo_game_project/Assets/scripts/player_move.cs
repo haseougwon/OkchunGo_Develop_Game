@@ -115,6 +115,38 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Item")
+        {
+            Item item = collision.gameObject.GetComponent<Item>();
+            if (item.type == "speed")
+            {
+                maxSpeed = 5;
+                Invoke("SpeedUpStop", 5);
+            }
+
+            else if (item.type == "jump")
+            {
+                jumpPower = 15;
+                Invoke("JumpUpStop", 5);
+            }
+
+            else if (item.type == "power")
+
+                Destroy(collision.gameObject);
+        }
+    }
+
+    void SpeedUpStop()
+    {
+        maxSpeed = 3;
+    }
+
+    void JumpUpStop()
+    {
+        jumpPower = 10;
+    }
     void OnAttack(Transform enemy)
     {
 
