@@ -30,8 +30,9 @@ public class Player_UI : MonoBehaviour
     }
   
     void OnCollisionEnter2D(Collision2D collision) {
-   
-        if (collision.gameObject.tag == "Enemy") {
+
+        if (collision.gameObject.tag == "Enemy")
+        {
             if (gameObject.layer == 11)
             {
                 Debug.Log("¡¢√À");
@@ -55,6 +56,33 @@ public class Player_UI : MonoBehaviour
         }
     }
 
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Item")
+        {
+            Item item = collision.gameObject.GetComponent<Item>();
+            switch (item.type)
+            {
+                case "heart":
+                    if (heart == 3)
+                    {
+                        break;
+                    }
+                    else if (heart == 2)
+                    {
+                        heart += 1;
+                        heart_1.SetActive(true);
+                    }
+                    else if (heart == 1)
+                    {
+                        heart += 1;
+                        heart_2.SetActive(true);
+                    }
+                    break;
+            }
+            Destroy(collision.gameObject);
+        }
+    }
     void GameOver() {
     
     }

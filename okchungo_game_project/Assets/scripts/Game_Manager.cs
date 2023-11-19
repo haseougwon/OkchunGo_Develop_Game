@@ -1,7 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Game_Manager : MonoBehaviour
 {
@@ -12,6 +16,11 @@ public class Game_Manager : MonoBehaviour
     public GameObject BgmVolumeGauge_1;
     public GameObject BgmVolumeGauge_2;
     public GameObject BgmVolumeGauge_3;
+
+    //�ؽ�Ʈ
+    public Text coin;
+    public Text time;
+    public Text stage;
 
     public void Start()
     {
@@ -45,10 +54,19 @@ public class Game_Manager : MonoBehaviour
         {
             BgmVolumeGauge_3.SetActive(true);
         }
+        Time.timeScale = 0;
+
+        //�ܰ�,����,�ð� ǥ��
+        coin.text += "���� :" + Data_controller.instance.nowPlayer.coin.ToString();
+        time.text += "�÷��� �ð� :" + Data_controller.instance.nowPlayer.time.ToString();
+        stage.text += Data_controller.instance.nowPlayer.stage.ToString() + "�ܰ�"; 
     }
 
     public void Update()
     {
+            Data_controller.instance.nowPlayer.time += Time.deltaTime;
+            time.text = "�÷��� �ð� :" + Data_controller.instance.nowPlayer.time.ToString("0.00");
+        
         if (Input.GetButtonDown("Cancel"))
         {
             if (menu.activeSelf)
@@ -125,13 +143,34 @@ public class Game_Manager : MonoBehaviour
         }
     }
 
+        if (menu.activeSelf)
+        {
+            Time.timeScale = 0;
+        }
+        else
+        {
+            Time.timeScale = 1;
+        }
+    }
+    
     public void Save()
     {
         Data_controller.instance.SaveData();
     }
 
+    public void Load()
+    {
+        SceneManager.LoadScene("select");
+    }
+
     public void GameExit()
     {
         Application.Quit();
+    }
+
+    public void CoinUp()
+    {
+        Data_controller.instance.nowPlayer.coin += 1;
+        coin.text = "���� :" + Data_controller.instance.nowPlayer.coin.ToString();
     }
 }
