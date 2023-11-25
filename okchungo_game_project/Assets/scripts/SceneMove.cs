@@ -1,12 +1,38 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SceneMove : MonoBehaviour
 {
-    public void select()
+    private AudioSource AudioSource;
+    public AudioClip ClickSound_1;
+    public string scene;
+
+
+    private void Start()
     {
-        SceneManager.LoadScene("select");
+        AudioSource = GetComponent<AudioSource>();
     }
+    public void ClickSound1()
+    {
+        AudioSource.clip = ClickSound_1;
+        AudioSource.volume = Data_controller.instance.nowPlayer.EffectVolume;
+        AudioSource.Play();
+    }
+    
+
+    public void SceneChange()
+    {
+        SceneManager.LoadScene(scene);
+    }
+
+    public void Select2()
+    {
+        ClickSound1();
+        Invoke("SceneChange", 0.5f);
+    }
+
 }
+

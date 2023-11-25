@@ -13,14 +13,19 @@ public class Player_UI : MonoBehaviour
     public GameObject heart_1;
     public GameObject heart_2;
     public GameObject heart_3;
-   
-    
+    private AudioSource audioSource;
+    public AudioClip BackGroundSound;
+
     Rigidbody2D rigid;
     GameObject obj;
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
     void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
-        obj = GameObject.Find("Player");
+
 
     }
   

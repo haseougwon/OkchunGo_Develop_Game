@@ -8,6 +8,9 @@ public class PlayerData
     public string name;
     public int stage = 1;
     public int coin = 0;
+    public int item = -1;
+    public float BgmVolume=0.6f;
+    public float EffectVolume=0.6f;
     public float time = 0;
 }
 
@@ -18,7 +21,7 @@ public class Data_controller : MonoBehaviour
     public PlayerData nowPlayer = new PlayerData(); 
 
     public string path; 
-    public int nowSlot; 
+    public int nowSlot;
 
     private void Awake()
     {
@@ -27,7 +30,7 @@ public class Data_controller : MonoBehaviour
             instance = this;
         }
         else if (instance != this)
-        {
+        {   
             Destroy(instance.gameObject);
         }
         DontDestroyOnLoad(this.gameObject);
