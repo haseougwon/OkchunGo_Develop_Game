@@ -148,10 +148,8 @@ public class player_move : MonoBehaviour
 
         if (collision.gameObject.tag == "coin")
         {
-            //���� ����
             Object.GetComponent<Game_Manager>().CoinUp();
 
-            //���� ���� ���
             Coin coin2 = collision.gameObject.GetComponent<Coin>();
             coin2.Coin1();
         }
@@ -194,5 +192,5 @@ public class player_move : MonoBehaviour
 
         spriteRenderer.color = new Color(1, 1, 1, 1);
         isAbsoluteTime = false;
-    } 
+    }   
 }
