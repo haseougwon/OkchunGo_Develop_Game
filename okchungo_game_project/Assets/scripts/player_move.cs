@@ -115,6 +115,10 @@ public class player_move : MonoBehaviour
             {
                 OnAttack(collision.transform);
             }
+            else if (maxSpeed == 9)
+            {
+                OnAttack(collision.transform);
+            }
             else
             {
                 OnDamaged(collision.transform.position);
@@ -141,13 +145,17 @@ public class player_move : MonoBehaviour
 
             else if (item.type == "jump")
             {
-                jumpPower = 15;
+                jumpPower = 17;
                 Invoke("JumpUpStop", 5);
             }
 
             else if (item.type == "power")
+            {
+                maxSpeed = 9;
+                Invoke("SpeedUpStop", 8);
+            }
 
-                Destroy(collision.gameObject);
+            Destroy(collision.gameObject);
         }
 
         if (collision.gameObject.tag == "coin")
@@ -166,7 +174,7 @@ public class player_move : MonoBehaviour
 
     void JumpUpStop()
     {
-        jumpPower = 10;
+        jumpPower = 12;
     }
 
     void OnAttack(Transform enemy)
