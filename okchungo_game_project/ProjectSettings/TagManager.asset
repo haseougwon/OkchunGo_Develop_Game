@@ -7,13 +7,6 @@ TagManager:
   - Platform
   - portal
   - Enemy
-
-  - Item
-
-  - coin
-  - Enemy(E)
-  - boom
-
   layers:
   - Default
   - TransparentFX
@@ -21,12 +14,12 @@ TagManager:
   - Platform
   - Water
   - UI
-  - Enemy
   - 
   - 
   - 
-  - Player
-  - PlayerDamaged
+  - 
+  - 
+  - 
   - 
   - 
   - 
@@ -50,10 +43,4 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: Text
-    uniqueID: 863264523
-    locked: 0
-  - name: Icon
-    uniqueID: 1306640137
     locked: 0

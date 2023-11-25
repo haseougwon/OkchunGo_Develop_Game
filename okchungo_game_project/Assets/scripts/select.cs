@@ -59,7 +59,7 @@ public class Select : MonoBehaviour
             Data_controller.instance.nowPlayer.name = newPlayerName.text; 
             Data_controller.instance.SaveData();
         }
-        SceneManager.LoadScene("test");
+        SceneManager.LoadScene("stage_1");
         Time.timeScale = 1;
     }
 }

@@ -6,6 +6,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class Game_Manager : MonoBehaviour
 {
@@ -16,11 +17,10 @@ public class Game_Manager : MonoBehaviour
     public GameObject BgmVolumeGauge_1;
     public GameObject BgmVolumeGauge_2;
     public GameObject BgmVolumeGauge_3;
-
-    //�ؽ�Ʈ
     public Text coin;
     public Text time;
     public Text stage;
+    public GameObject canvaus;
 
     public void Start()
     {
@@ -56,26 +56,37 @@ public class Game_Manager : MonoBehaviour
         }
         Time.timeScale = 0;
 
-        //�ܰ�,����,�ð� ǥ��
-        coin.text += "���� :" + Data_controller.instance.nowPlayer.coin.ToString();
-        time.text += "�÷��� �ð� :" + Data_controller.instance.nowPlayer.time.ToString();
-        stage.text += Data_controller.instance.nowPlayer.stage.ToString() + "�ܰ�"; 
+    
+        coin.text += "점수 :" + Data_controller.instance.nowPlayer.coin.ToString();
+        time.text += "단계 :" + Data_controller.instance.nowPlayer.time.ToString();
+        stage.text += Data_controller.instance.nowPlayer.stage.ToString() + "단계";
     }
 
     public void Update()
     {
-            Data_controller.instance.nowPlayer.time += Time.deltaTime;
-            time.text = "�÷��� �ð� :" + Data_controller.instance.nowPlayer.time.ToString("0.00");
-        
+
+        Data_controller.instance.nowPlayer.time += Time.deltaTime;
+            time.text = "플레이시간:" + Data_controller.instance.nowPlayer.time.ToString("0.00");
+        if (menu.activeSelf)
+        {
+            Time.timeScale = 0;
+        }
+        else
+        {
+            Time.timeScale = 1;
+        }
+
         if (Input.GetButtonDown("Cancel"))
         {
             if (menu.activeSelf)
             {
                 menu.SetActive(false);
+                Time.timeScale = 1;
             }
             else
             {
                 menu.SetActive(true);
+                Time.timeScale = 0;
             }
         }
     }
@@ -88,6 +99,7 @@ public class Game_Manager : MonoBehaviour
         else
         {
             menu.SetActive(true);
+            
         }
     }
 
@@ -114,7 +126,6 @@ public class Game_Manager : MonoBehaviour
             EffectVolumeGauge_2.SetActive(true);
             EffectVolumeGauge_3.SetActive(true);
         }
-        Debug.Log(Data_controller.instance.nowPlayer.EffectVolume);
     }
     public void BgmVolumeClicked()
     {
@@ -142,16 +153,6 @@ public class Game_Manager : MonoBehaviour
 
         }
     }
-
-        if (menu.activeSelf)
-        {
-            Time.timeScale = 0;
-        }
-        else
-        {
-            Time.timeScale = 1;
-        }
-    }
     
     public void Save()
     {
@@ -165,12 +166,17 @@ public class Game_Manager : MonoBehaviour
 
     public void GameExit()
     {
+        SceneManager.LoadScene("TitleScene");
+    }
+    public void End() {
         Application.Quit();
     }
 
     public void CoinUp()
     {
+        SceneMove sound = canvaus.GetComponent<SceneMove>();
+        sound.ClickSound1();
         Data_controller.instance.nowPlayer.coin += 1;
-        coin.text = "���� :" + Data_controller.instance.nowPlayer.coin.ToString();
+        coin.text = "점수 :" + Data_controller.instance.nowPlayer.coin.ToString();
     }
 }

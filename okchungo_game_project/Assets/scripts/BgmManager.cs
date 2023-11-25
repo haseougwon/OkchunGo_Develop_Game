@@ -15,7 +15,6 @@ public class BgmManager : MonoBehaviour
         audioSource.Play();
     }
 
-    // Update is called once per frame
     void Update()
     {
         audioSource.volume = Data_controller.instance.nowPlayer.BgmVolume;

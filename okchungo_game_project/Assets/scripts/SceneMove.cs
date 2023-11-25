@@ -8,8 +8,8 @@ public class SceneMove : MonoBehaviour
 {
     private AudioSource AudioSource;
     public AudioClip ClickSound_1;
-    public AudioClip ClickSound_2;
     public string scene;
+
 
     private void Start()
     {
@@ -23,22 +23,16 @@ public class SceneMove : MonoBehaviour
     }
     
 
-    void Update()
-    {
-    }
     public void SceneChange()
     {
         SceneManager.LoadScene(scene);
     }
-    public void select()
+
+    public void Select2()
     {
         ClickSound1();
         Invoke("SceneChange", 0.5f);
+    }
 
-    }
-    public void Setting()
-    {
-        
-    }
 }
 

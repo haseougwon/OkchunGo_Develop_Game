@@ -16,7 +16,7 @@ public class player_move : MonoBehaviour
     public bool isAbsoluteTime = false;
     public GameObject Object;
 
-    bool isPlatform;
+    public bool isPlatform=true;
 
     [SerializeField] LayerMask mask; 
     [SerializeField] Transform pos;
@@ -41,19 +41,17 @@ public class player_move : MonoBehaviour
         anim = GetComponent<Animator>();
         jumpCut = jumpCount;
     }
-    void Update()
+    private void Update()
     {
-        
         Vector2 frontVec = new Vector2(rigid.position.x, rigid.position.y);
         Debug.DrawRay(frontVec, Vector3.down * 0.55f, new Color(0, 1, 0));
         RaycastHit2D isPlatform = Physics2D.Raycast(frontVec, Vector3.down, 0.55f, LayerMask.GetMask("Platform"));
-
         if (isPlatform == true && Input.GetButtonUp("Jump") && jumpCut > 0)
         {
             rigid.velocity = Vector2.up * jumpPower;
             audioSource.clip = JumpSound;
+            audioSource.volume = Data_controller.instance.nowPlayer.EffectVolume;
             audioSource.Play();
-
         }
         if (Input.GetButtonUp("Jump"))
         {
@@ -67,19 +65,15 @@ public class player_move : MonoBehaviour
         {
             jumpCut = jumpCount;
         }
-
         if (Input.GetButtonUp("Horizontal"))
         {
-
             rigid.velocity = new Vector2(0, rigid.velocity.y);
         }
-     
+
         if (Input.GetButton("Horizontal"))
         {
-
             spriteRenderer.flipX = (Input.GetAxisRaw("Horizontal") == -1);
         }
-
         if (Input.GetAxisRaw("Horizontal") == 0)
         {
             anim.SetBool("isRun", false);
@@ -92,8 +86,8 @@ public class player_move : MonoBehaviour
         {
             anim.SetBool("isRun", true);
         }
-
-        if (Input.GetButtonDown("Jump")) {
+        if (Input.GetButtonDown("Jump"))
+        {
             anim.SetTrigger("doJump");
         }
     }
@@ -127,7 +121,6 @@ public class player_move : MonoBehaviour
             }
         }
 
-        //���� ���� Ȯ��
         if (collision.gameObject.tag == "boom")
         {
             OnDamaged(collision.transform.position);
@@ -159,10 +152,9 @@ public class player_move : MonoBehaviour
 
         if (collision.gameObject.tag == "coin")
         {
-            //���� ����
+          
             Object.GetComponent<Game_Manager>().CoinUp();
-
-            //���� ���� ���
+           
             Coin coin2 = collision.gameObject.GetComponent<Coin>();
             coin2.Coin1();
         }
@@ -181,6 +173,7 @@ public class player_move : MonoBehaviour
     void OnAttack(Transform enemy)
     {
         audioSource.clip = AttackSound;
+        audioSource.volume = Data_controller.instance.nowPlayer.EffectVolume;
         audioSource.Play();
         rigid.AddForce(Vector2.up * 10, ForceMode2D.Impulse);
 
@@ -193,6 +186,7 @@ public class player_move : MonoBehaviour
     {
         gameObject.layer = 11;
         audioSource.clip = DamagedSound;
+        audioSource.volume = Data_controller.instance.nowPlayer.EffectVolume;
         audioSource.Play();
         spriteRenderer.color = new Color(1,1,1,0.4f);
 
