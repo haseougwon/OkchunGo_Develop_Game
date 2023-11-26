@@ -21,6 +21,7 @@ public class Game_Manager : MonoBehaviour
     public Text time;
     public Text stage;
     public GameObject canvaus;
+    
 
     public void Start()
     {
@@ -59,12 +60,12 @@ public class Game_Manager : MonoBehaviour
     
         coin.text += "점수 :" + Data_controller.instance.nowPlayer.coin.ToString();
         time.text += "단계 :" + Data_controller.instance.nowPlayer.time.ToString();
-        stage.text += Data_controller.instance.nowPlayer.stage.ToString() + "단계";
+        stage.text += Data_controller.instance.nowPlayer.stage.ToString() + "스테이지";
     }
 
     public void Update()
     {
-
+        coin.text = "점수 :" + Data_controller.instance.nowPlayer.coin.ToString();
         Data_controller.instance.nowPlayer.time += Time.deltaTime;
             time.text = "플레이시간:" + Data_controller.instance.nowPlayer.time.ToString("0.00");
         if (menu.activeSelf)
@@ -171,12 +172,15 @@ public class Game_Manager : MonoBehaviour
     public void End() {
         Application.Quit();
     }
+    public void set()
+    {
+        gameObject.SetActive(true);
+    }
 
     public void CoinUp()
     {
         SceneMove sound = canvaus.GetComponent<SceneMove>();
         sound.ClickSound1();
         Data_controller.instance.nowPlayer.coin += 1;
-        coin.text = "점수 :" + Data_controller.instance.nowPlayer.coin.ToString();
     }
 }

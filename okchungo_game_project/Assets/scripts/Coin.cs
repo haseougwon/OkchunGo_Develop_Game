@@ -16,13 +16,26 @@ public class Coin : MonoBehaviour
     {
         
     }
+    void ActivityOff() {
+        gameObject.SetActive(false);
+    }
 
+    void OnDisable()
+    {
+        if (Player_UI.isRestart == true) {
+                transform.position = new Vector2(transform.position.x, transform.position.y - 1.4f);
+                spriteRenderer.color = new Color(0, 0, 0, 0.4f);
+                Player_UI.isRestart = false;
+            gameObject.SetActive(true);
+        }
+
+    }
     public void Coin1()
     {       
         spriteRenderer.color = new Color(1, 1, 1, 0.4f);
 
-        transform.position = new Vector2(transform.position.x, transform.position.y * 1.5f);
+        transform.position = new Vector2(transform.position.x, transform.position.y + 1.4f);
 
-        Destroy(gameObject, 0.5f);
+        Invoke("ActivityOff", 0.5f);
     }
 }
