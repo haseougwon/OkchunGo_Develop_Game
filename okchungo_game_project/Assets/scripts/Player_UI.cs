@@ -137,10 +137,12 @@ public class Player_UI : MonoBehaviour
         }
         else if (Data_controller.instance.nowPlayer.stage == 2)
         {
+            Data_controller.instance.nowPlayer.coin = 0;
             SceneManager.LoadScene("stage_2");
         }
         else if (Data_controller.instance.nowPlayer.stage == 2)
         {
+            Data_controller.instance.nowPlayer.coin = 0;
             SceneManager.LoadScene("stage_3");
         }
     }

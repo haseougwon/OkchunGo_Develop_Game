@@ -18,9 +18,9 @@ TagManager:
   - Platform
   - Water
   - UI
-  -
-  - DeadLine
-  - Enemy
+  - 
+  - 
+  - 
   - 
   - Player
   - OnDamaged

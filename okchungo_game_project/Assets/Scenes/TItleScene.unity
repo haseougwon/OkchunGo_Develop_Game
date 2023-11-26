@@ -1768,7 +1768,7 @@ MonoBehaviour:
   coin: {fileID: 0}
   time: {fileID: 680852657}
   stage: {fileID: 0}
-  sound: {fileID: 0}
+  canvaus: {fileID: 0}
 --- !u!114 &914500641
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1782,7 +1782,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ClickSound_1: {fileID: 8300000, guid: 62e0e025e80c4f5458fa7067b4ec0f59, type: 3}
-  scene: select
 --- !u!1 &1007019075
 GameObject:
   m_ObjectHideFlags: 0
@@ -3225,7 +3224,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 914500641}
         m_TargetAssemblyTypeName: SceneMove, Assembly-CSharp
-        m_MethodName: Select2
+        m_MethodName: Select
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
