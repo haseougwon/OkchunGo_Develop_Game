@@ -18,12 +18,12 @@ TagManager:
   - Platform
   - Water
   - UI
-  - Enermy
+  -
   - DeadLine
+  - Enemy
   - 
-  - 
-  - 
-  - 
+  - Player
+  - OnDamaged
   - 
   - 
   - 

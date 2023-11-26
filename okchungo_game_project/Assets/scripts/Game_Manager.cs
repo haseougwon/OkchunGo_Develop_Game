@@ -23,6 +23,7 @@ public class Game_Manager : MonoBehaviour
     public GameObject canvaus;
     
 
+
     public void Start()
     {
         if (Data_controller.instance.nowPlayer.EffectVolume == 1f)
@@ -65,9 +66,12 @@ public class Game_Manager : MonoBehaviour
 
     public void Update()
     {
-        coin.text = "점수 :" + Data_controller.instance.nowPlayer.coin.ToString();
+        stage.text = Data_controller.instance.nowPlayer.stage.ToString() + "단계";
+        coin.text = "점수:" + Data_controller.instance.nowPlayer.coin.ToString();
+
         Data_controller.instance.nowPlayer.time += Time.deltaTime;
-            time.text = "플레이시간:" + Data_controller.instance.nowPlayer.time.ToString("0.00");
+        time.text = "플레이시간:" + Data_controller.instance.nowPlayer.time.ToString("0.00");
+        
         if (menu.activeSelf)
         {
             Time.timeScale = 0;
