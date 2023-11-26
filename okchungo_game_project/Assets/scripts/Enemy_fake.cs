@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class Enemy_Explosive : MonoBehaviour
+public class Enemy_fake : MonoBehaviour
 {
-    
+
     Rigidbody2D rigid;
     public Transform target;
     Animator anim;
@@ -17,7 +17,7 @@ public class Enemy_Explosive : MonoBehaviour
     public float maxSpeed;
 
     void Start()
-    {     
+    {
         rigid = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -36,7 +36,7 @@ public class Enemy_Explosive : MonoBehaviour
             transform.rotation = Quaternion.AngleAxis(angle + 90, Vector3.forward);
         }
 
-        if(Vector2.Distance(transform.position, target.position) < 4)
+        if (Vector2.Distance(transform.position, target.position) < 8)
         {
             Sensing();
         }
@@ -50,31 +50,19 @@ public class Enemy_Explosive : MonoBehaviour
     }
 
     public void move()
-    {
-        if (i)
+    {   
+        if(i)
         {
             player = true;
-            Invoke("boom", 3);
             i = false;
         }
-    }
-
-    public void stop()
-    {
-        player = false;
-        
-        Destroy(gameObject, 1);
     }
 
     public void boom()
     {
         spriteRenderer.color = new Color(1, 1, 1, 0);
+        player = false;
         cir.GetComponent<Sense>().Boom();
-
-        if (Vector2.Distance(transform.position, target.position) < 1.5f)
-        {
-            target.GetComponent<player_move>().OnDamaged(transform.position);
-        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -84,8 +72,7 @@ public class Enemy_Explosive : MonoBehaviour
             player = false;
             spriteRenderer.color = new Color(1, 1, 1, 0);
             cir.GetComponent<Sense>().Boom();
-            target.GetComponent<player_move>().OnDamaged(collision.transform.position);
-            Destroy(gameObject,0.5f);
+            Destroy(gameObject,1);
         }
     }
 }

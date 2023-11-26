@@ -8,7 +8,9 @@ using System.IO;
 public class Select : MonoBehaviour
 {
     public GameObject creat;	
-    public Text[] slotText;		
+    public Text[] slotText;
+    public Text[] timeText;
+    public Text[] coinText;
     public Text newPlayerName;	
 
     bool[] savefile = new bool[3];	
@@ -22,7 +24,9 @@ public class Select : MonoBehaviour
                 savefile[i] = true;		
                 Data_controller.instance.nowSlot = i;	
                 Data_controller.instance.LoadData();	
-                slotText[i].text = Data_controller.instance.nowPlayer.name;	
+                slotText[i].text = Data_controller.instance.nowPlayer.name;
+                timeText[i].text = "시간 :" + Data_controller.instance.nowPlayer.time.ToString("0.00");
+                coinText[i].text = "점수 :" + Data_controller.instance.nowPlayer.coin.ToString();
             }
             else	
             {

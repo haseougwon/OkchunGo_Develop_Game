@@ -19,11 +19,11 @@ TagManager:
   - Water
   - UI
   - 
+  - not
+  - Enemy
   - 
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - OnDamaged
   - 
   - 
   - 

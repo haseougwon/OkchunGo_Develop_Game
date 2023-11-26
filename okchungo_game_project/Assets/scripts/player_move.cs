@@ -43,9 +43,10 @@ public class player_move : MonoBehaviour
     }
     private void Update()
     {
-        Vector2 frontVec = new Vector2(rigid.position.x, rigid.position.y);
+        Vector2 frontVec = new Vector2(rigid.position.x * 0.8f, rigid.position.y);
         Debug.DrawRay(frontVec, Vector3.down * 0.55f, new Color(0, 1, 0));
         RaycastHit2D isPlatform = Physics2D.Raycast(frontVec, Vector3.down, 0.55f, LayerMask.GetMask("Platform"));
+
         if (isPlatform == true && Input.GetButtonUp("Jump") && jumpCut > 0)
         {
             rigid.velocity = Vector2.up * jumpPower;

@@ -22,6 +22,7 @@ public class Game_Manager : MonoBehaviour
     public Text stage;
     public GameObject canvaus;
 
+
     public void Start()
     {
         if (Data_controller.instance.nowPlayer.EffectVolume == 1f)
@@ -55,18 +56,16 @@ public class Game_Manager : MonoBehaviour
             BgmVolumeGauge_3.SetActive(true);
         }
         Time.timeScale = 0;
-
-    
-        coin.text += "점수 :" + Data_controller.instance.nowPlayer.coin.ToString();
-        time.text += "단계 :" + Data_controller.instance.nowPlayer.time.ToString();
-        stage.text += Data_controller.instance.nowPlayer.stage.ToString() + "단계";
     }
 
     public void Update()
     {
+        stage.text = Data_controller.instance.nowPlayer.stage.ToString() + "단계";
+        coin.text = "점수:" + Data_controller.instance.nowPlayer.coin.ToString();
 
         Data_controller.instance.nowPlayer.time += Time.deltaTime;
-            time.text = "플레이시간:" + Data_controller.instance.nowPlayer.time.ToString("0.00");
+        time.text = "플레이시간:" + Data_controller.instance.nowPlayer.time.ToString("0.00");
+        
         if (menu.activeSelf)
         {
             Time.timeScale = 0;
@@ -177,6 +176,5 @@ public class Game_Manager : MonoBehaviour
         SceneMove sound = canvaus.GetComponent<SceneMove>();
         sound.ClickSound1();
         Data_controller.instance.nowPlayer.coin += 1;
-        coin.text = "점수 :" + Data_controller.instance.nowPlayer.coin.ToString();
     }
 }
